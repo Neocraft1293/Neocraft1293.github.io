@@ -1,0 +1,70 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overlays.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <title>Mon Site</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+    }
+
+    .xenia-image {
+        max-width: 200px; /* ajustez la largeur maximale selon vos besoins */
+        height: auto;
+        margin-right: 20px;
+        margin-top: 40px;
+        float: left;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    /* Ajout de styles pour une meilleure présentation sur les petits écrans */
+    @media (max-width: 600px) {
+        img {
+            float: none;
+            margin-right: 0;
+            margin-bottom: 10px;
+            max-width: 100%; /* pour s'adapter à la largeur de l'écran */
+        }
+    }
+
+    /* Ajout de marge entre l'image et la barre */
+    div {
+        margin-top: 10px;
+    }
+</style>
+<body>
+    <!-- Inclure le contenu de l'overlay générique -->
+    <div id="overlay-content"></div>
+
+      <!-- Contenu de la page -->
+    <div>
+        <img class="xenia-image" src="images/Linux-Fox-The-Lesser-Known-Alternative-Mascot.jpg" alt="Xenia - La Mascotte Linux">        <h1>Xenia - La Mascotte Linux</h1>
+        <p>Xenia est une mascotte alternative de Linux qui a captivé la communauté open source par sa personnalité unique et son histoire fascinante. Découvrez l'évolution de Xenia depuis sa création en 1996 jusqu'à devenir un symbole inclusif dans le monde du logiciel libre.</p>
+        
+        <h2>Histoire de Xenia</h2>
+        <p>Initialement conçue comme une alternative à Tux, la mascotte officielle de Linux, Xenia a été redessinée en 2019 par la petite amie de Cathodegaytube, devenant ainsi une représentation féminine et faisant son coming-out pendant le mois de la fierté.</p>
+
+        <h2>Source</h2>
+        <p>Cette page a été créée par neocraft1293. Les informations sur Xenia et les œuvres d'art proviennent de différentes sources, notamment Twitter, Tumblr, et d'autres plateformes de médias sociaux.</p>
+    </div>
+
+    <!-- Script d'overlay générique -->
+    <script src="overlay.js"></script>
+</body>
+</html>
