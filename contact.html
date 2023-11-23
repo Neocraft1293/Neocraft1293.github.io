@@ -1,0 +1,86 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overlays.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <title>Contactez-nous - Mon Site</title>
+
+    <!-- Styles CSS spécifiques à la page -->
+    <style>
+        /* Contenu de la page */
+        div {
+            max-width: 100%;
+            margin: 0px auto 20px; /* Ajustez cette valeur en fonction de la hauteur totale des barres d'overlay */
+            padding: 20px;
+            background-color: #f8f8f8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Liste des méthodes de contact */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        /* Images dans la liste */
+        li img {
+            max-width: 50px; /* Ajustez cette valeur selon vos besoins */
+            max-height: 50px; /* Ajustez cette valeur selon vos besoins */
+            margin-right: 10px; /* Ajout de marge à droite pour l'espace entre l'image et le texte */
+        }
+
+        /* Styles supplémentaires pour améliorer l'apparence */
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Inclure le contenu de l'overlay générique -->
+    <div id="overlay-content">
+        <img src="images/logo.png" alt="Logo">
+        <button onclick="window.location.href='accueil.html'">Accueil</button>
+    </div>
+
+    <!-- Contenu de la page -->
+    <div>
+        <h1>Contactez-moi</h1>
+        <p>Bienvenue sur ma page de contact. N'hésitez pas à me contacter via l'une des méthodes suivantes :</p>
+
+        <!-- Liste des méthodes de contact -->
+        <ul>
+            <li>
+                <img src="images/mail.png" alt="Mail Icon">
+                <a> mail: contact@neocraft1293.fr</a>
+            </li>
+            <li>
+                <img src="images/signal.png" alt="Signal Icon">
+                <span>signal: 07 81 48 17 58</span>
+            </li>
+            <li>
+                <img src="images/matrix.png" alt="Matrix Icon">
+                <span>matrix: @neocraft1293:matrix.org</span>
+            </li>
+            <li>
+                <img src="images/discord.png" alt="Discord Icon">
+                <span>discord: @neocraft1293</span> <!-- Assurez-vous d'ajouter un lien Discord approprié si nécessaire -->
+            </li>
+        </ul>
+    </div>
+
+    <!-- Script d'overlay générique -->
+    <script src="overlay.js"></script>
+</body>
+</html>

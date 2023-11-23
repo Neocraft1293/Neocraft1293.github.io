@@ -1,0 +1,37 @@
+/* overlays.css */
+
+/* Styles spécifiques à l'overlay */
+#overlay-container-top,
+#overlay-container-bottom {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin: 0; /* Élimine la marge autour des barres d'overlay */
+    height: 50px; /* Ajustez cette valeur en fonction de la hauteur totale souhaitée pour les barres d'overlay */
+    z-index: 2; /* Assure que les barres d'overlay sont empilées au-dessus du contenu de la page */
+}
+
+#overlay-container-top {
+    top: 0;
+    background-color: #333;
+    left: 0;
+    color: #fff;
+}
+
+#overlay-container-bottom {
+    bottom: 0;
+    background-color: #333;
+    left: 0;
+    color: #fff;
+}
+
+#overlay-container-top img,
+#overlay-container-bottom img {
+    height: 30px;
+}
+
+#overlay-container-top button,
+#overlay-container-bottom button {
+    margin-top: 5px; /* Ajout de cette ligne pour ajouter un espace entre l'image et le bouton */
+}

@@ -1,0 +1,8 @@
+/* styles.css */
+
+/* Contenu de la page */
+div {
+    padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
