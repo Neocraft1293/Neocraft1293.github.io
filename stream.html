@@ -1,0 +1,67 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overlays.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black !important; /* Ajout du fond noir */
+        }
+
+        .iframe-container {
+            background-color: black !important; /* Ajout du fond noir */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center; /* Centrer horizontalement */
+        }
+
+        .iframe-container iframe {
+            background-color: black !important; /* Ajout du fond noir */
+            height: 100vh; /* Utiliser 100% de la hauteur disponible */
+            margin-right: 10px;
+        }
+
+        #iframe1 {
+            background-color: black !important; /* Ajout du fond noir */
+            width: 70vw; /* Utiliser 70% de la largeur de la vue */
+            margin-top: 8vw;
+            
+            margin-left: 0vw;
+            margin-right: 0vw;
+        }
+
+        #iframe2 {
+            background-color: black !important; /* Ajout du fond noir */
+            width: 31vw; /* Utiliser 30% de la largeur de la vue */
+        }
+
+        #overlay-content {
+            /* Styles for the overlay-content, if any */
+        }
+    </style>
+    <title>Neocraft1293</title>
+</head>
+<body>
+    <!-- Inclure le contenu de l'overlay générique -->
+    <div id="overlay-content"></div>
+
+    <!-- Contenu de la page -->
+    <div class="iframe-container">
+        <iframe id="iframe1" src="http://192.168.1.164:8080/f65db166-bbf8-4a1b-b2ea-0d222f25ea3b.html" frameborder="no" scrolling="no" allowfullscreen="true"></iframe>
+        <iframe id="iframe2" src="https://kick.com/neocraft1293/chatroom" frameborder="no" scrolling="no" allowfullscreen="true"></iframe>
+    </div>
+
+    <!-- Script d'overlay générique -->
+    <script src="overlay.js"></script>
+</body>
+</html>
