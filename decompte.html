@@ -114,7 +114,6 @@
     const selectedDate = document.getElementById('countdownDate').value;
     const baseUrl = window.location.href.split('?')[0];
     const newUrl = `${baseUrl}?date=${selectedDate}`;
-    document.getElementById('urlDisplay').value = newUrl;
     copyToClipboard(newUrl);
   });
 
