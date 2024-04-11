@@ -98,100 +98,112 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const dateParam = urlParams.get('date');
-    if (dateParam) {
-      document.getElementById('countdownDate').valueAsDate = new Date(dateParam);
-      const selectedDate = new Date(dateParam).getTime();
-      startCountdown(selectedDate);
-      document.getElementById('countdownForm').classList.add('hidden');
-      document.getElementById('actions').style.display = 'block';
-      document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(new Date(dateParam))}`;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fonction pour mettre à jour l'heure et la date précises
+      function updatePreciseDateTime() {
+        const now = new Date(); // Obtient la date et l'heure actuelles avec précision
+        const options = { timeZone: 'Europe/Paris', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const formattedDateTime = now.toLocaleString('fr-FR', options);
+        document.getElementById('currentDateTimeDisplay').textContent = formattedDateTime;
+      }
+  
+      // Appelle la fonction pour la première fois
+      updatePreciseDateTime();
+  
+      // Met à jour la date et l'heure précises toutes les secondes
+      setInterval(updatePreciseDateTime, 1000);
+  
+      const urlParams = new URLSearchParams(window.location.search);
+      const dateParam = urlParams.get('date');
+      if (dateParam) {
+        document.getElementById('countdownDate').valueAsDate = new Date(dateParam);
+        const selectedDate = new Date(dateParam).getTime();
+        startCountdown(selectedDate);
+        document.getElementById('countdownForm').classList.add('hidden');
+        document.getElementById('actions').style.display = 'block';
+        document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(new Date(dateParam))}`;
+      }
+    });
+  
+    document.getElementById('countdownForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const selectedDate = new Date(document.getElementById('countdownDate').value);
+      const formattedDate = selectedDate.toISOString().slice(0, 16).replace('T', ' ');
+      const baseUrl = window.location.href.split('?')[0];
+      const newUrl = `${baseUrl}?date=${formattedDate}`;
+      window.location.href = newUrl;
+      document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(selectedDate)}`;
+    });
+  
+    function startCountdown(selectedDate) {
+      const countdownElement = document.getElementById('countdown');
+  
+      function updateCountdown() {// Obtenir l'heure actuelle en utilisant l'heure de paris
+        const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
+        const distance = selectedDate - now.getTime(); // Calculer la différence en millisecondes
+  
+        if (distance <= 0) {
+          countdownElement.innerHTML = 'Temps écoulé !';
+        } else {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+          countdownElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants.`;
+        }
+      }
+  
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     }
-  });
-
-  document.getElementById('countdownForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const selectedDate = new Date(document.getElementById('countdownDate').value);
-    const formattedDate = selectedDate.toISOString().slice(0, 16).replace('T', ' ');
-    const baseUrl = window.location.href.split('?')[0];
-    const newUrl = `${baseUrl}?date=${formattedDate}`;
-    window.location.href = newUrl;
-    document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(selectedDate)}`;
-  });
-
-  function startCountdown(selectedDate) {
-  const countdownElement = document.getElementById('countdown');
-
-  function updateCountdown() {// Obtenir l'heure actuelle en utilisant l'heure de paris
-    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
-    const distance = selectedDate - now.getTime(); // Calculer la différence en millisecondes
-
-    if (distance <= 0) {
-      countdownElement.innerHTML = 'Temps écoulé !';
-    } else {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants.`;
+  
+    function updateCurrentDateTime() {
+      const currentDateTime = new Date(); // Obtenir la date et l'heure actuelles (heure locale par défaut)
+      const options = { timeZone: 'Europe/Paris', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+      const formattedDateTime = currentDateTime.toLocaleString('fr-FR', options);
+      document.getElementById('currentDateTimeDisplay').textContent = formattedDateTime;
     }
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-function updateCurrentDateTime() {
-  const currentDateTime = new Date(); // Obtenir la date et l'heure actuelles (heure locale par défaut)
-  const options = { timeZone: 'Europe/Paris', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-  const formattedDateTime = currentDateTime.toLocaleString('fr-FR', options);
-  document.getElementById('currentDateTimeDisplay').textContent = formattedDateTime;
-}
-
-
-
-// Mettre à jour la date et l'heure actuelles lors du chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-  updateCurrentDateTime();
-});
-
-// Mettre à jour la date et l'heure actuelles toutes les secondes
-setInterval(updateCurrentDateTime, 1000);
-
-
-
-  function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-    return date.toLocaleDateString('fr-FR', options);
-  }
-
-  document.getElementById('shareCountdown').addEventListener('click', function() {
-    const selectedDate = document.getElementById('countdownDate').value;
-    const baseUrl = window.location.href.split('?')[0];
-    const newUrl = `${baseUrl}?date=${selectedDate}`;
-    copyToClipboard(newUrl);
-  });
-
-  document.getElementById('reloadPage').addEventListener('click', function() {
-    const baseUrl = window.location.href.split('?')[0];
-    window.location.href = baseUrl;
-  });
-
-  function copyToClipboard(text) {
-    const input = document.createElement('input');
-    input.style.position = 'fixed';
-    input.style.opacity = 0;
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
-    alert('URL copiée dans le presse-papiers !');
-  }
-</script>
+  
+    // Mettre à jour la date et l'heure actuelles lors du chargement de la page
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCurrentDateTime();
+    });
+  
+    // Mettre à jour la date et l'heure actuelles toutes les secondes
+    setInterval(updateCurrentDateTime, 1000);
+  
+    function formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+      return date.toLocaleDateString('fr-FR', options);
+    }
+  
+    document.getElementById('shareCountdown').addEventListener('click', function() {
+      const selectedDate = document.getElementById('countdownDate').value;
+      const baseUrl = window.location.href.split('?')[0];
+      const newUrl = `${baseUrl}?date=${selectedDate}`;
+      copyToClipboard(newUrl);
+    });
+  
+    document.getElementById('reloadPage').addEventListener('click', function() {
+      const baseUrl = window.location.href.split('?')[0];
+      window.location.href = baseUrl;
+    });
+  
+    function copyToClipboard(text) {
+      const input = document.createElement('input');
+      input.style.position = 'fixed';
+      input.style.opacity = 0;
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      alert('URL copiée dans le presse-papiers !');
+    }
+  </script>
+  
+  
 
 </body>
 </html>
