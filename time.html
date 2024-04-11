@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Site Web</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div id="time"></div>
+    <div id="date"></div>
+  </div>
+
+  <script>
+    // Fonction pour mettre à jour l'heure et la date
+    function updateClock() {
+      var now = new Date();
+      var hours = now.getHours();
+      var minutes = now.getMinutes();
+      var seconds = now.getSeconds();
+      var day = now.getDate();
+      var month = now.getMonth() + 1; // Les mois commencent à 0, donc ajoutez 1
+      var year = now.getFullYear();
+
+      // Ajoute un zéro devant les chiffres < 10
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+      day = day < 10 ? "0" + day : day;
+      month = month < 10 ? "0" + month : month;
+
+      // Format de l'heure HH:MM:SS
+      var timeString = hours + ":" + minutes + ":" + seconds;
+
+      // Format de la date JJ/MM/AAAA
+      var dateString = day + "/" + month + "/" + year;
+
+      // Met à jour le contenu des éléments avec les id "time" et "date"
+      document.getElementById("time").innerHTML = timeString;
+      document.getElementById("date").innerHTML = dateString;
+
+      // Calcule le temps restant jusqu'à la prochaine seconde
+      var remainingMilliseconds = 1000 - now.getMilliseconds();
+
+      // Appelle la fonction à la prochaine seconde
+      setTimeout(updateClock, remainingMilliseconds);
+    }
+
+    // Appelle la fonction pour la première fois
+    updateClock();
+  </script>
+</body>
+</html>
