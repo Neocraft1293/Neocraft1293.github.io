@@ -116,7 +116,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const dateParam = urlParams.get('date');
       if (dateParam) {
-        document.getElementById('countdownDate').valueAsDate = new Date(dateParam);
+        document.getElementById('countdownDate').value = dateParam;
         const selectedDate = new Date(dateParam).getTime();
         startCountdown(selectedDate);
         document.getElementById('countdownForm').classList.add('hidden');
