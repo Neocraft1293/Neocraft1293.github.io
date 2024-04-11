@@ -89,6 +89,10 @@
   </div>
 </div>
 
+<div id="currentDateTimeDisplay" style="position: fixed; bottom: 10px; right: 10px;"></div>
+
+
+
 <div id="copyright">
   <p>© 2024 neocraft1293. Tous droits réservés.</p>
 </div>
@@ -118,27 +122,46 @@
   });
 
   function startCountdown(selectedDate) {
-    const countdownElement = document.getElementById('countdown');
+  const countdownElement = document.getElementById('countdown');
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = selectedDate - now;
+  function updateCountdown() {
+    const now = new Date(); // Obtenir l'heure actuelle en utilisant l'heure locale de l'utilisateur
+    const distance = selectedDate - now.getTime(); // Calculer la différence en millisecondes
 
-      if (distance <= 0) {
-        countdownElement.innerHTML = 'Temps écoulé !';
-      } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (distance <= 0) {
+      countdownElement.innerHTML = 'Temps écoulé !';
+    } else {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        countdownElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants.`;
-      }
+      countdownElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants.`;
     }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
   }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+// Fonction pour mettre à jour la date et l'heure actuelles
+function updateCurrentDateTime() {
+  const currentDateTime = new Date(); // Obtenir la date et l'heure actuelles (heure locale par défaut)
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  const formattedDateTime = currentDateTime.toLocaleDateString('fr-FR', options);
+  document.getElementById('currentDateTimeDisplay').textContent = formattedDateTime;
+}
+
+
+// Mettre à jour la date et l'heure actuelles lors du chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+  updateCurrentDateTime();
+});
+
+// Mettre à jour la date et l'heure actuelles toutes les secondes
+setInterval(updateCurrentDateTime, 1000);
+
+
 
   function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
