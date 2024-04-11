@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte à rebours ara ara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 2rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Compte à rebours "ara ara"</h1>
+<p>Le décompte pour l'ara ara est en cours :</p>
+<div id="countdown">
+    <span id="days"></span> jours
+    <span id="hours"></span> heures
+    <span id="minutes"></span> minutes
+    <span id="seconds"></span> secondes
+</div>
+
+<script>
+    // Date cible du décompte
+    var countDownDate = new Date("April 13, 2024 12:00:00").getTime();
+
+    // Mise à jour du compte à rebours toutes les secondes
+    var x = setInterval(function() {
+
+        // Récupération de la date et de l'heure actuelle
+        var now = new Date().getTime();
+
+        // Calcul de la différence entre la date cible et la date actuelle
+        var distance = countDownDate - now;
+
+        // Calcul des jours, heures, minutes et secondes restantes
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Affichage du compte à rebours dans l'élément correspondant
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        // Si le décompte est terminé, afficher un message
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
