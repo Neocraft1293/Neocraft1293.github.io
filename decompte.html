@@ -17,13 +17,27 @@
       margin-top: 50px;
     }
 
-    #share {
+    #actions {
       position: fixed;
       bottom: 10px;
       left: 10px;
     }
 
-    #share button {
+    #actions button {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #share {
+      float: left;
+      margin-right: 10px;
+    }
+
+    #reload {
+      float: left;
+    }
+
+    #share button, #reload button {
       display: block;
     }
 
@@ -58,8 +72,13 @@
 
 <div id="countdown"></div>
 
-<div id="share">
-  <button id="shareCountdown">Partager le décompte</button>
+<div id="actions">
+  <div id="share">
+    <button id="shareCountdown">Partager le décompte</button>
+  </div>
+  <div id="reload">
+    <button id="reloadPage">Nouveau décompte</button>
+  </div>
 </div>
 
 <div id="copyright">
@@ -75,7 +94,7 @@
       const selectedDate = new Date(dateParam).getTime();
       startCountdown(selectedDate);
       document.getElementById('countdownForm').classList.add('hidden');
-      document.getElementById('share').style.display = 'block';
+      document.getElementById('actions').style.display = 'block';
     }
   });
 
@@ -84,7 +103,7 @@
     const selectedDate = new Date(document.getElementById('countdownDate').value).getTime();
     startCountdown(selectedDate);
     document.getElementById('countdownForm').classList.add('hidden');
-    document.getElementById('share').style.display = 'block';
+    document.getElementById('actions').style.display = 'block';
   });
 
   function startCountdown(selectedDate) {
@@ -115,6 +134,11 @@
     const baseUrl = window.location.href.split('?')[0];
     const newUrl = `${baseUrl}?date=${selectedDate}`;
     copyToClipboard(newUrl);
+  });
+
+  document.getElementById('reloadPage').addEventListener('click', function() {
+    const baseUrl = window.location.href.split('?')[0];
+    window.location.href = baseUrl;
   });
 
   function copyToClipboard(text) {
