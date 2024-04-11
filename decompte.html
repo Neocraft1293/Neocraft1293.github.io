@@ -17,6 +17,12 @@
       margin-top: 50px;
     }
 
+    #countdownDateDisplay {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
     #actions {
       position: fixed;
       bottom: 10px;
@@ -70,6 +76,8 @@
   <button type="submit">Valider</button>
 </form>
 
+<div id="countdownDateDisplay"></div>
+
 <div id="countdown"></div>
 
 <div id="actions">
@@ -95,6 +103,7 @@
       startCountdown(selectedDate);
       document.getElementById('countdownForm').classList.add('hidden');
       document.getElementById('actions').style.display = 'block';
+      document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(new Date(dateParam))}`;
     }
   });
 
@@ -105,6 +114,7 @@
     const baseUrl = window.location.href.split('?')[0];
     const newUrl = `${baseUrl}?date=${formattedDate}`;
     window.location.href = newUrl;
+    document.getElementById('countdownDateDisplay').textContent = `Décompte jusqu'au : ${formatDate(selectedDate)}`;
   });
 
   function startCountdown(selectedDate) {
@@ -128,6 +138,11 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+  }
+
+  function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return date.toLocaleDateString('fr-FR', options);
   }
 
   document.getElementById('shareCountdown').addEventListener('click', function() {
