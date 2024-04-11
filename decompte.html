@@ -37,13 +37,7 @@
 
 <h1>Compte à rebours</h1>
 
-<?php
-    // Récupération de la date et du nom du décompte depuis les paramètres d'URL
-    $date = isset($_GET['date']) ? $_GET['date'] : "April 13, 2024 12:00:00";
-    $name = isset($_GET['name']) ? $_GET['name'] : "ara ara";
-?>
-
-<p>Le décompte pour "<?php echo $name; ?>" est en cours :</p>
+<p>Le décompte est en cours :</p>
 <div id="countdown">
     <span id="days"></span> jours
     <span id="hours"></span> heures
@@ -54,16 +48,31 @@
 <div id="progress-bar">
     <div id="progress"></div>
 </div>
-<p id="progress-note">La barre de progression indique le temps écoulé depuis le chargement de la page jusqu'à la date du compte à rebours (<?php echo $date; ?>).</p>
+<p id="progress-note">La barre de progression indique le temps écoulé depuis le chargement de la page jusqu'à la date du compte à rebours.</p>
 
 <p id="time-spent">Temps écoulé depuis le chargement de la page : <span id="elapsed-time"></span></p>
 
 <script>
+    // Fonction pour extraire les paramètres d'URL
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Récupération de la date et du nom du décompte depuis les paramètres d'URL
+    var dateParam = getParameterByName('date');
+    var nameParam = getParameterByName('name');
+
     // Date de chargement de la page
     var startDate = new Date().getTime();
 
     // Date cible du décompte
-    var countDownDate = new Date("<?php echo $date; ?>").getTime();
+    var countDownDate = new Date(dateParam).getTime();
 
     // Mise à jour du compte à rebours toutes les secondes
     var x = setInterval(function() {
