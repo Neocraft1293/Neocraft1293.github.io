@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte à rebours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 2rem;
+            margin-top: 50px;
+        }
+        #progress-bar {
+            width: 80%;
+            margin: 20px auto;
+            height: 20px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        #progress {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #progress-note {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Compte à rebours</h1>
+
+<?php
+    // Récupération de la date et du nom du décompte depuis les paramètres d'URL
+    $date = isset($_GET['date']) ? $_GET['date'] : "April 13, 2024 12:00:00";
+    $name = isset($_GET['name']) ? $_GET['name'] : "ara ara";
+?>
+
+<p>Le décompte pour "<?php echo $name; ?>" est en cours :</p>
+<div id="countdown">
+    <span id="days"></span> jours
+    <span id="hours"></span> heures
+    <span id="minutes"></span> minutes
+    <span id="seconds"></span> secondes
+</div>
+
+<div id="progress-bar">
+    <div id="progress"></div>
+</div>
+<p id="progress-note">La barre de progression indique le temps écoulé depuis le chargement de la page jusqu'à la date du compte à rebours (<?php echo $date; ?>).</p>
+
+<p id="time-spent">Temps écoulé depuis le chargement de la page : <span id="elapsed-time"></span></p>
+
+<script>
+    // Date de chargement de la page
+    var startDate = new Date().getTime();
+
+    // Date cible du décompte
+    var countDownDate = new Date("<?php echo $date; ?>").getTime();
+
+    // Mise à jour du compte à rebours toutes les secondes
+    var x = setInterval(function() {
+
+        // Récupération de la date et de l'heure actuelle
+        var now = new Date().getTime();
+
+        // Calcul de la différence entre la date cible et la date actuelle
+        var distance = countDownDate - now;
+
+        // Calcul des jours, heures, minutes et secondes restantes
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Mise à jour de l'affichage du compte à rebours
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        // Calcul de la progression en pourcentage
+        var progress = ((now - startDate) / (countDownDate - startDate)) * 100;
+        document.getElementById("progress").style.width = progress + "%";
+
+        // Calcul du temps écoulé depuis le chargement de la page
+        var elapsedTime = now - startDate;
+        var elapsedHours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var elapsedMinutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+        var elapsedSeconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+        // Mise à jour de l'affichage du temps écoulé
+        document.getElementById("elapsed-time").innerHTML = elapsedHours + " heures, " + elapsedMinutes + " minutes, " + elapsedSeconds + " secondes";
+
+        // Si le décompte est terminé, arrêter la mise à jour
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+            document.getElementById("progress").style.width = "100%";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
