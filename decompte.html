@@ -100,10 +100,11 @@
 
   document.getElementById('countdownForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const selectedDate = new Date(document.getElementById('countdownDate').value).getTime();
-    startCountdown(selectedDate);
-    document.getElementById('countdownForm').classList.add('hidden');
-    document.getElementById('actions').style.display = 'block';
+    const selectedDate = new Date(document.getElementById('countdownDate').value);
+    const formattedDate = selectedDate.toISOString().slice(0, 16).replace('T', ' ');
+    const baseUrl = window.location.href.split('?')[0];
+    const newUrl = `${baseUrl}?date=${formattedDate}`;
+    window.location.href = newUrl;
   });
 
   function startCountdown(selectedDate) {
