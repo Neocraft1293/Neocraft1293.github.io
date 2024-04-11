@@ -1,120 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte à rebours</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #countdown {
-            font-size: 2rem;
-            margin-top: 50px;
-        }
-        #progress-bar {
-            width: 80%;
-            margin: 20px auto;
-            height: 20px;
-            background-color: #f0f0f0;
-            position: relative;
-        }
-        #progress {
-            width: 0;
-            height: 100%;
-            background-color: #4caf50;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #progress-note {
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compte à rebours</title>
+  <style>
+    #countdownForm {
+      display: block;
+    }
+
+    #countdownForm.hidden {
+      display: none;
+    }
+
+    #share {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
 <h1>Compte à rebours</h1>
 
-<p>Le décompte est en cours :</p>
-<div id="countdown">
-    <span id="days"></span> jours
-    <span id="hours"></span> heures
-    <span id="minutes"></span> minutes
-    <span id="seconds"></span> secondes
-</div>
+<form id="countdownForm">
+  <label for="countdownDate">Choisissez une date et une heure :</label>
+  <input type="datetime-local" id="countdownDate" name="countdownDate">
+  <button type="submit">Valider</button>
+</form>
 
-<div id="progress-bar">
-    <div id="progress"></div>
-</div>
-<p id="progress-note">La barre de progression indique le temps écoulé depuis le chargement de la page jusqu'à la date du compte à rebours.</p>
+<div id="countdown"></div>
 
-<p id="time-spent">Temps écoulé depuis le chargement de la page : <span id="elapsed-time"></span></p>
+<div id="share">
+  <button id="shareCountdown">Partager le décompte</button>
+  <input type="text" id="urlDisplay" readonly>
+</div>
 
 <script>
-    // Fonction pour extraire les paramètres d'URL
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const dateParam = urlParams.get('date');
+    if (dateParam) {
+      document.getElementById('countdownDate').valueAsDate = new Date(dateParam);
+      const selectedDate = new Date(dateParam).getTime();
+      startCountdown(selectedDate);
+      document.getElementById('countdownForm').classList.add('hidden');
+      document.getElementById('share').style.display = 'block';
+    }
+  });
+
+  document.getElementById('countdownForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const selectedDate = new Date(document.getElementById('countdownDate').value).getTime();
+    startCountdown(selectedDate);
+    document.getElementById('countdownForm').classList.add('hidden');
+    document.getElementById('share').style.display = 'block';
+  });
+
+  function startCountdown(selectedDate) {
+    const countdownElement = document.getElementById('countdown');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = selectedDate - now;
+
+      if (distance <= 0) {
+        countdownElement.innerHTML = 'Temps écoulé !';
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants.`;
+      }
     }
 
-    // Récupération de la date et du nom du décompte depuis les paramètres d'URL
-    var dateParam = getParameterByName('date');
-    var nameParam = getParameterByName('name');
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
 
-    // Date de chargement de la page
-    var startDate = new Date().getTime();
+  document.getElementById('shareCountdown').addEventListener('click', function() {
+    const selectedDate = document.getElementById('countdownDate').value;
+    const baseUrl = window.location.href.split('?')[0];
+    const newUrl = `${baseUrl}?date=${selectedDate}`;
+    document.getElementById('urlDisplay').value = newUrl;
+    copyToClipboard(newUrl);
+  });
 
-    // Date cible du décompte
-    var countDownDate = new Date(dateParam).getTime();
-
-    // Mise à jour du compte à rebours toutes les secondes
-    var x = setInterval(function() {
-
-        // Récupération de la date et de l'heure actuelle
-        var now = new Date().getTime();
-
-        // Calcul de la différence entre la date cible et la date actuelle
-        var distance = countDownDate - now;
-
-        // Calcul des jours, heures, minutes et secondes restantes
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Mise à jour de l'affichage du compte à rebours
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("minutes").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
-
-        // Calcul de la progression en pourcentage
-        var progress = ((now - startDate) / (countDownDate - startDate)) * 100;
-        document.getElementById("progress").style.width = progress + "%";
-
-        // Calcul du temps écoulé depuis le chargement de la page
-        var elapsedTime = now - startDate;
-        var elapsedHours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var elapsedMinutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-        var elapsedSeconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-
-        // Mise à jour de l'affichage du temps écoulé
-        document.getElementById("elapsed-time").innerHTML = elapsedHours + " heures, " + elapsedMinutes + " minutes, " + elapsedSeconds + " secondes";
-
-        // Si le décompte est terminé, arrêter la mise à jour
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
-            document.getElementById("progress").style.width = "100%";
-        }
-    }, 1000);
+  function copyToClipboard(text) {
+    const input = document.createElement('input');
+    input.style.position = 'fixed';
+    input.style.opacity = 0;
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    alert('URL copiée dans le presse-papiers !');
+  }
 </script>
 
 </body>
