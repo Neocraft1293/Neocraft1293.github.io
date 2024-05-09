@@ -474,6 +474,18 @@
             var {
                 color: #ffb4ab;
             }
+            /* css pour la barre qui previent que ce nest pas le site officiel */
+            /* ca doit être une barre qui prend tout la largeur de la page */
+            .sitenonoff {
+                background-color: #f44336;
+                color: white;
+                text-align: center;
+                padding: 10px;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
         }
     </style>
 <header>
@@ -497,6 +509,8 @@
           <li><a href="https://grapheneos.org/contact">Contact</a></li>
       </ul>
   </nav>
+  <div class="sitenonoff">Ce site est une copie du site officiel de GrapheneOS en français. Le site officiel de GrapheneOS est <a href="https://grapheneos.org/">https://grapheneos.org/</a>.</div>
+
 </header>
 <main class="normalize" id="grapheneos">
   <div class="content hero">
