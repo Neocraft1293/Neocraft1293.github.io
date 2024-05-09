@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <title>GrapheneOS : le système d'exploitation mobile privé et sécurisé</title>
+    <meta content="GrapheneOS est un système d'exploitation mobile axé sur la sécurité et la confidentialité, compatible avec les applications Android." name="description">
+    <meta content="#212121" name="theme-color">
+    <meta content="dark light" name="color-scheme">
+    <meta content="#ffffff" name="msapplication-TileColor">
+    <meta content="GrapheneOS : le système d'exploitation mobile privé et sécurisé" property="og:title">
+    <meta content="GrapheneOS est un système d'exploitation mobile axé sur la sécurité et la confidentialité, compatible avec les applications Android." property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="https://grapheneos.org/opengraph.png" property="og:image">
+    <meta content="512" property="og:image:width">
+    <meta content="512" property="og:image:height">
+    <meta content="Logo de GrapheneOS" property="og:image:alt">
+    <meta content="GrapheneOS" property="og:site_name">
+    <meta content="https://grapheneos.org/" property="og:url">
+    <link href="https://grapheneos.org/" rel="canonical">
+    <link href="/favicon.ico" rel="icon">
+    <link href="/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+    <link href="https://grapheneos.org/780febcc.mask-icon.svg" rel="mask-icon" color="#1a1a1a">
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/0601d045.main.css" rel="stylesheet" integrity="sha256-BgHQRdggQwKhNNlDByzhRX4vXmOHhMaEA/t24KE/+Rc=">
+    <link href="/manifest.webmanifest" rel="manifest">
+    <link href="/LICENSE.txt" rel="license">
+    <link href="https://grapheneos.social/@GrapheneOS" rel="me">
+    <script integrity="sha256-RWOh+2XZRWcJXZtW4/h3D9jgiz3KP1Gl4LY4E5FCq6I=" src="/js/4563a1fb.redirect.js" type="module"></script>
+    <style>
+        html {
+            height: -webkit-fill-available;
+        }
+
+        #site-menu ul, body {
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, h4 {
+            letter-spacing: .009375rem;
+        }
+
+        body {
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            font-family: Roboto, sans-serif;
+            line-height: 1.5;
+            background-color: #fafafa;
+            overflow-y: scroll;
+        }
+
+        #site-menu ul li a, a {
+            color: #1565c0;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #6a1b9a;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        body, h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited, h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited {
+            color: rgba(0, 0, 0, 87%);
+        }
+
+        h1, h2, h3 {
+            font-size: 2.25rem;
+            line-height: 2.75rem;
+            letter-spacing: 0;
+        }
+
+        h2, h3 {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+
+        h3 {
+            font-size: 1.375rem;
+            line-height: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+
+        code, h5, pre {
+            font-size: .875rem;
+            line-height: 1.25rem;
+            letter-spacing: .00625rem;
+        }
+
+        h6 {
+            font-size: .6875rem;
+            line-height: 1rem;
+            letter-spacing: .03125rem;
+        }
+
+        code, pre {
+            background-color: #e0e2ec;
+            color: #44474e;
+            font-family: "Roboto Mono", monospace;
+            letter-spacing: .015625rem;
+        }
+
+        pre {
+            border-radius: 12px;
+            border: 1px solid #74777f;
+            overflow-x: auto;
+            padding: .875rem;
+        }
+
+        code {
+            border-radius: 8px;
+            padding: .25rem;
+        }
+
+        var {
+            color: #ba1a1a;
+        }
+
+        #site-menu ul {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        #site-menu {
+            background-color: #212121;
+            white-space: nowrap;
+        }
+
+        #site-menu ul li {
+            list-style-type: none;
+            display: flex;
+        }
+
+        #site-menu ul li:hover {
+            background-color: #424242;
+        }
+
+        #site-menu ul li a {
+            color: #fff;
+            display: flex;
+            padding: 1em;
+            align-items: center;
+        }
+
+        #site-menu ul li a:visited {
+            color: #fff;
+        }
+
+        #site-menu ul li[aria-current] a {
+            color: #64b5f6;
+        }
+
+        #site-menu img {
+            height: 1.8rem;
+            width: 1.8rem;
+            filter: invert(100);
+            vertical-align: middle;
+            margin-right: .5rem;
+        }
+
+        #site-menu ul li[aria-current] img {
+            filter: invert(60%) sepia(24%) saturate(997%) hue-rotate(168deg) brightness(107%) contrast(93%);
+        }
+
+        main {
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1em;
+            max-width: 832px;
+            min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+        }
+
+        .button, .button:visited, button {
+            color: #fff;
+            font-size: .9em;
+            font-weight: 700;
+            letter-spacing: .0892857143em;
+            background-color: #0053a3;
+            border-radius: 20px;
+            border: 0;
+            height: 40px;
+            padding: .5rem 1.5rem;
+        }
+
+        .button:hover, button:hover {
+            background-color: #1863ad;
+            cursor: pointer;
+        }
+
+        .button:focus, button:focus {
+            background-color: #2f73b4;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 20%), 0 4px 5px 0 rgba(0, 0, 0, 14%), 0 1px 10px 0 rgba(0, 0, 0, 12%);
+        }
+
+        button:disabled {
+            background-color: rgb(26 27 30/12%);
+            color: rgb(26 27 30/38%);
+            cursor: not-allowed;
+        }
+
+        .button, .button:active, .button:hover, .button:visited {
+            text-decoration: none;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            line-height: 2.5rem;
+        }
+
+        .coin-address, footer img {
+            display: block;
+        }
+
+        .coin-address img {
+            image-rendering: pixelated;
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+        }
+
+        footer img {
+            width: 60px;
+            height: auto;
+        }
+
+        .break p, .coin-address, footer {
+            text-align: center;
+        }
+
+        .coin-address, footer, footer img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1em;
+            max-width: 100vw;
+            overflow-wrap: break-word;
+        }
+
+        footer a, footer a:visited {
+            color: #616161;
+        }
+
+        #social {
+            line-height: 2;
+            margin-top: 2em;
+            padding: 0;
+            list-style-type: none;
+            max-inline-size: 60ch;
+        }
+
+        #social li {
+            display: inline-block;
+            padding: 0 .5em;
+        }
+
+        #beta-channel ul, #stable-channel ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .error-text {
+            color: #b00020;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: .5rem;
+        }
+
+        main.normalize {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            max-width: 832px;
+            margin: auto;
+            padding: 3.5rem 1rem;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+
+        .hero h1 {
+            margin: 0;
+            line-height: 1;
+        }
+
+        .device-img {
+            margin: 0 0 0 2rem;
+            position: relative;
+        }
+
+        .phone-logo-img {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .surface {
+            background-color: #e6e6e6;
+            width: 100%;
+        }
+
+        .start {
+            margin-top: 0;
+        }
+
+        .end {
+            margin-bottom: 0;
+        }
+
+        .break p {
+            line-height: 1rem;
+            margin: 0;
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local("Roboto"), local("Roboto-Regular"), url(/fonts/roboto-v30-regular-latin.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: italic;
+            font-weight: 400;
+            font-display: swap;
+            src: local("Roboto Italic"), local("Roboto-Italic"), url(/fonts/roboto-v30-regular-italic-latin.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: local("Roboto Bold"), local("Roboto-Bold"), url(/fonts/roboto-v30-bold-latin.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: "Roboto Mono";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local("Roboto Mono"), local("RobotoMono-Regular"), url(/fonts/robotomono-v23-regular-latin.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: "Roboto Mono";
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: local("Roboto Mono Bold"), local("RobotoMono-Bold"), url(/fonts/robotomono-v23-bold-latin.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @media only screen and (max-width: 735px) {
+            .hero {
+                flex-flow: column nowrap;
+                text-align: center;
+            }
+
+            .device-img {
+                margin: 3.5rem 0 0;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+            }
+
+            a {
+                color: #90caf9;
+            }
+
+            a:visited {
+                color: #ce93d8;
+            }
+
+            body, h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited, h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited {
+                color: rgba(255, 255, 255, 87%);
+            }
+
+            .button, .button:visited, button {
+                color: #000;
+                background-color: #95c4ff;
+            }
+
+            .button:hover, button:hover {
+                background-color: #89b4ea;
+            }
+
+            .button:focus, button:focus {
+                background-color: #7ca3d4;
+            }
+
+            button:disabled {
+                background-color: rgb(227 226 230 / 12%);
+                color: rgb(227 226 230 / 38%);
+            }
+
+            code, pre {
+                background-color: #44474e;
+                color: #c4c6cf;
+            }
+
+            pre {
+                border-color: #8e9099;
+            }
+
+            footer a, footer a:visited {
+                color: #9f9f9f;
+            }
+
+            footer img {
+                filter: invert(87%);
+            }
+
+            .error-text {
+                color: #cf6679;
+            }
+
+            td {
+                border-color: #222;
+            }
+
+            .phone-img {
+                filter: brightness(.87);
+            }
+
+            .phone-logo-img {
+                filter: invert(87%);
+            }
+
+            .surface {
+                background-color: #212121;
+            }
+
+            var {
+                color: #ffb4ab;
+            }
+        }
+    </style>
+<header>
+  <nav id="site-menu">
+      <ul>
+          <li aria-current="page">
+              <a href="/">
+                  <img alt="" src="https://grapheneos.org/780febcc.mask-icon.svg">GrapheneOS
+              </a>
+          </li>
+          <li><a href="https://grapheneos.org/features">Fonctionnalités</a></li>
+          <li><a href="https://grapheneos.org/install/">Installer</a></li>
+          <li><a href="https://grapheneos.org/build">Construire</a></li>
+          <li><a href="https://grapheneos.org/usage">Utilisation</a></li>
+          <li><a href="https://grapheneos.org/faq">FAQ</a></li>
+          <li><a href="https://grapheneos.org/releases">Versions</a></li>
+          <li><a href="https://grapheneos.org/source">Code source</a></li>
+          <li><a href="https://grapheneos.org/history/">Historique</a></li>
+          <li><a href="https://grapheneos.org/articles/">Articles</a></li>
+          <li><a href="https://grapheneos.org/donate">Donner</a></li>
+          <li><a href="https://grapheneos.org/contact">Contact</a></li>
+      </ul>
+  </nav>
+</header>
+<main class="normalize" id="grapheneos">
+  <div class="content hero">
+      <div>
+          <h1><a href="#grapheneos">GrapheneOS</a></h1>
+          <p>Le système d'exploitation mobile privé et sécurisé avec compatibilité des applications Android. Développé en tant que projet open source à but non lucratif.</p>
+          <a href="https://grapheneos.org/install/" class="button">Installer GrapheneOS</a>
+      </div>
+      <figure class="device-img">
+          <img alt="" src="https://grapheneos.org/f979bf77.pixel-7-pro.svg" height="579" width="276" class="phone-img">
+          <img alt="" src="https://grapheneos.org/780febcc.mask-icon.svg" height="200" width="200" class="phone-logo-img">
+      </figure>
+  </div>
+  <div class="surface">
+      <div class="content break">
+          <p>Familiarisez-vous avec GrapheneOS</p>
+      </div>
+  </div>
+  <div class="content">
+      <section id="about">
+          <h2 class="start"><a href="#about">À propos</a></h2>
+          <p>GrapheneOS est un système d'exploitation mobile axé sur la confidentialité et la sécurité avec compatibilité des applications Android, développé en tant que projet open source à but non lucratif. Il est axé sur la recherche et le développement de technologies de confidentialité et de sécurité, y compris des améliorations substantielles de la sandboxing, des atténuations des exploits et du modèle de permissions. Il a été fondé en 2014 et était <a href="https://grapheneos.org/history/copperheados">anciennement connu sous le nom de CopperheadOS</a>.</p>
+          <p>GrapheneOS améliore la confidentialité et la sécurité du système d'exploitation de bas en haut. Il déploie des technologies pour atténuer des classes entières de vulnérabilités et rendre l'exploitation des sources de vulnérabilités les plus courantes nettement plus difficile. Il améliore la sécurité à la fois du système d'exploitation et des applications qui y sont exécutées. La sandbox des applications et d'autres limites de sécurité sont renforcées. GrapheneOS essaie d'éviter d'impacte l'expérience utilisateur avec les fonctionnalités de confidentialité et de sécurité. Idéalement, les fonctionnalités peuvent être conçues de sorte qu'elles soient toujours activées sans impact sur l'expérience utilisateur et sans complexité supplémentaire comme des options de configuration. Ce n'est pas toujours réalisable, et GrapheneOS ajoute divers bascules pour des fonctionnalités comme la permission Réseau, la permission Capteurs, les restrictions lorsque l'appareil est verrouillé (périphériques USB, caméra, tuiles rapides), etc. ainsi que des fonctionnalités de confidentialité et de sécurité plus complexes visibles par l'utilisateur avec leur propre UX.</p>
+          <p>La <a href="https://grapheneos.org/features">page des fonctionnalités</a> fournit un aperçu des importantes améliorations de confidentialité et de sécurité apportées par GrapheneOS au projet Android Open Source (AOSP). Beaucoup de nos fonctionnalités passées ont été <a href="https://grapheneos.org/faq#upstream">contribuées à AOSP, Linux et d'autres projets pour améliorer la confidentialité et la sécurité pour des milliards d'utilisateurs</a> et ne sont donc plus répertoriées sur notre page des fonctionnalités.</p>
+          <p>Les versions officielles sont disponibles sur la <a href="https://grapheneos.org/releases">page des versions</a> et les instructions d'installation sont sur la <a href="https://grapheneos.org/install/">page d'installation</a>.</p>
+          <p>GrapheneOS développe également diverses applications et services avec un accent sur la confidentialité et la sécurité. Vanadium est une variante renforcée du navigateur Chromium et de WebView spécifiquement construite pour GrapheneOS. GrapheneOS inclut également notre visionneuse de PDF minimaliste axée sur la sécurité, notre application Auditeur basée sur le matériel / service d'attestation fournissant une vérification locale et distante des appareils, notre application appareil photo moderne axée sur la confidentialité / la sécurité, et la sauvegarde chiffrée Seedvault développée initialement pour être incluse dans GrapheneOS.</p>
+      </section>
+      <section id="never-google-services">
+          <h2><a href="#never-google-services">Aucune application ou service Google</a></h2>
+          <p>GrapheneOS n'inclura jamais Google Play services ou une autre implémentation des services Google comme microG. Il est possible d'installer les services Play en tant qu'ensemble d'applications entièrement sandboxées sans privilèges spéciaux via notre <a href="https://grapheneos.org/usage#sandboxed-google-play">couche de compatibilité sandboxée avec Google Play</a>. Consultez <a href="https://grapheneos.org/faq#google-services">la section FAQ</a> pour plus de détails sur nos plans pour combler les lacunes liées au fait de ne pas expédier de services Play et d'applications Google.</p>
+      </section>
+      <section id="device-support">
+          <h2><a href="https://grapheneos.org/faq#device-support">Prise en charge des appareils</a></h2>
+          <p class="end">Voir <a href="https://grapheneos.org/faq#device-support">la section FAQ sur la prise en charge des appareils</a>.</p>
+      </section>
+  </div>
+</main>
+<footer>
+  <a href="/"><img alt="GrapheneOS" src="https://grapheneos.org/780febcc.mask-icon.svg" height="512" width="512">GrapheneOS</a>
+  <ul id="social">
+      <li><a href="https://discuss.grapheneos.org/">Forum</a></li>
+      <li><a href="https://discord.com/invite/grapheneos">Discord</a></li>
+      <li><a href="https://t.me/GrapheneOS">Telegram</a></li>
+      <li><a href="https://matrix.to/#/%23community:grapheneos.org">#community:grapheneos.org</a></li>
+      <li><a href="/hiring">Recrutement</a></li>
+      <li><a href="https://twitter.com/GrapheneOS">Twitter</a></li>
+      <li><a href="https://grapheneos.social/@GrapheneOS">Mastodon</a></li>
+      <li><a href="https://bsky.app/profile/grapheneos.org">Bluesky</a></li>
+      <li><a href="https://github.com/GrapheneOS">GitHub</a></li>
+      <li><a href="https://reddit.com/r/GrapheneOS">Reddit</a></li>
+      <li><a href="https://www.linkedin.com/company/grapheneos/">LinkedIn</a></li>
+  </ul>
+</footer>
